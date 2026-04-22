@@ -1,0 +1,123 @@
+================================================================================
+                            KUANE FORREST
+                     Software Engineer & Developer
+================================================================================
+
+CONTACT INFORMATION
+─────────────────────────────────────────────────────────────────────────────
+Email:    kuaneforrest@gmail.com
+Phone:    (876) 360-9548
+Location: Kingston, Jamaica
+GitHub:   github.com/Juscenti
+LinkedIn: linkedin.com/in/kuane-forrest-2996012b3/
+
+================================================================================
+PROFESSIONAL SUMMARY
+─────────────────────────────────────────────────────────────────────────────
+Detail-oriented software engineer with hands-on experience in full-stack 
+development, mobile application design, and system architecture. Demonstrates 
+strong problem-solving abilities and a commitment to building scalable, 
+high-performance solutions with clean code and no shortcuts. Precision-focused 
+on building things that last.
+
+================================================================================
+CORE COMPETENCIES
+─────────────────────────────────────────────────────────────────────────────
+
+Languages & Frameworks:
+  • TypeScript / JavaScript (Primary)
+  • React Native & Expo (Mobile Development)
+  • Next.js (Full-Stack Web)
+  • HTML & CSS (Advanced)
+  • Python, SQL, C (Proficient)
+
+Backend & Data:
+  • PostgreSQL (Database Design & Architecture)
+  • System Design & Scalable Architecture
+  • API Design
+  • Full-Stack Development
+
+Tools & Technologies:
+  • Git & Version Control
+  • Vercel & Cloud Deployment
+  • Algorithms & Data Structures
+  • Code Testing & Debugging
+
+Soft Skills:
+  • Problem-Solving & Analytical Thinking
+  • Technical Documentation
+  • Attention to Detail
+  • System Architecture & Planning
+
+================================================================================
+EDUCATION
+─────────────────────────────────────────────────────────────────────────────
+
+UNIVERSITY OF TECHNOLOGY JAMAICA
+Bachelor of Science in Computing (Pending)
+
+Relevant Coursework:
+  • Programming Fundamentals
+  • Data Structures
+  • Computer Systems
+  • Web Development
+  • System Design Concepts
+
+MONA HIGH SCHOOL
+Caribbean Examinations Council (CXC) Passes:
+  • English Language - Grade 2
+  • Mathematics - Grade 2
+  • Visual Arts - Grade 2
+  • Information Technology - Grade 3
+  • English Literature - Grade 3
+
+================================================================================
+SELECTED PROJECTS
+─────────────────────────────────────────────────────────────────────────────
+
+001 — LiveLine (LIVE)
+Full-stack mobile application for real-time event logistics and user 
+coordination.
+  • TypeScript, React Native, Expo, PostgreSQL
+  • Clean separation: app, backend, database layers
+  • Status: Live & Active
+  • GitHub: github.com/Juscenti/LiveLine
+
+002 — WordHunter (LIVE)
+High-performance word puzzle solver with real-time visualization.
+  • Algorithm: Pathfinding, Adjacency-based search
+  • Supports 4×4, 5×5, circle, X-shaped boards
+  • Deployed: Vercel
+  • GitHub: github.com/Juscenti/WordHunter
+
+003 — Traverse (LIVE)
+Community-powered, AI-assisted civic intelligence map. Crowdsourced field 
+reports surfaced by AI pattern detection.
+  • AI Integration, Maps, Real-Time Updates
+  • Civic Tech application
+  • GitHub: github.com/kyim50/scoutz
+
+004 — Lavitur (IN PROGRESS)
+Personal clothing brand & e-commerce platform. Streetwear precision with 
+luxury finish.
+  • Brand Strategy & Visual Identity
+  • Web Development, E-Commerce
+  • GitHub: github.com/Juscenti/lavitur
+
+================================================================================
+ADDITIONAL INTERESTS & SKILLS
+─────────────────────────────────────────────────────────────────────────────
+
+Visual Art:
+  Visual thinking shapes how I approach system design. Structure and aesthetics 
+  are the same discipline.
+
+Writing & Technical Documentation:
+  Clear, precise communication in both prose and code. Both demand clarity and 
+  knowing when to stop.
+
+Language Learning:
+  Currently studying Japanese (日本語). Exploring how different languages 
+  approach pattern and structure in thought.
+
+================================================================================

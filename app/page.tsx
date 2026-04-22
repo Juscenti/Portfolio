@@ -1,0 +1,11 @@
+import TabLayout from "@/components/TabLayout";
+import Footer from "@/components/Footer";
+
+export default function Home() {
+  return (
+    <main>
+      <TabLayout />
+      <Footer />
+    </main>
+  );
+}
