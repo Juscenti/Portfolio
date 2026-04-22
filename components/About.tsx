@@ -8,7 +8,7 @@ export default function About() {
 
   // Add your image paths here
   const portraitImages = [
-    "/images/portrait.png",
+    "/images/portfolio.png",
     "/images/image1.png",
     "/images/image3.png",
     // Add more images as needed
