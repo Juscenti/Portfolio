@@ -8,6 +8,7 @@ interface ImageCarouselProps {
 
 export default function ImageCarousel({ images }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStartX, setTouchStartX] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   if (!images || images.length === 0) {
@@ -31,8 +32,26 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX === null) return;
+    const delta = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > 40) {
+      delta > 0 ? goToNext() : goToPrev();
+    }
+    setTouchStartX(null);
+  };
+
   return (
-    <div className="photo-frame carousel-container" ref={containerRef}>
+    <div
+      className="photo-frame carousel-container"
+      ref={containerRef}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className="carousel-wrapper">
         {/* Left tap zone */}
         <div className="carousel-tap-zone carousel-tap-left" onClick={goToPrev} />

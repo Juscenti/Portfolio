@@ -37,7 +37,7 @@
   --blue:       #1155bb;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
 html { scroll-behavior:smooth; }
 
 body {
@@ -992,19 +992,113 @@ footer { border-top:1px solid var(--border); padding:1.5rem 0; background:var(--
 /* ─────────────────────────────────────────────
    RESPONSIVE
 ───────────────────────────────────────────── */
-@media(max-width:640px) {
-  .nav-r a          { display:none; }
-  h1.name           { font-size:3rem; }
+
+/* Touch devices — hide custom cursor, restore native input */
+@media (pointer: coarse) {
+  #cur, #cur-r { display: none; }
+  body { cursor: auto; }
+  .btn, .tab-btn, #thm, button, a { cursor: pointer; }
+}
+
+/* ── Tablet — ease nav crowding ── */
+@media(max-width: 768px) {
+  .tab-nav-buttons { gap: 1.2rem; }
+}
+
+/* ── Mobile ── */
+@media(max-width: 640px) {
+  /* Wrapper padding */
+  .wrap, .hero-wrap { padding: 0 1.2rem; }
+
+  /* Section vertical rhythm */
+  section { padding: 3rem 0 2rem; scroll-margin-top: 80px; }
+
+  /* Old nav links */
+  .nav-r a { display: none; }
+
+  /* ── TAB NAVIGATION — 2-row stacked layout ─────── */
+  .tab-nav-inner {
+    flex-wrap: wrap;
+    padding: .65rem 1.2rem .55rem;
+    gap: 0;
+  }
+  .tab-logo { flex: 1; }
+  .tab-nav-buttons {
+    order: 3;
+    width: 100%;
+    gap: 0;
+    justify-content: space-between;
+    padding-top: .5rem;
+    margin-top: .5rem;
+    border-top: 1px solid var(--border);
+  }
+  .tab-btn { font-size: .62rem; }
+  .tab-btn::before { display: none; }
+  #thm { font-size: .6rem; padding: .25rem .5rem; }
+
+  /* Offset for taller 2-row nav */
+  .tab-content { padding-top: 86px; }
+  .tab-pane { min-height: calc(100vh - 86px); }
+  .home-pane #hero { min-height: calc(100vh - 86px); }
+
+  /* ── HERO ── */
+  h1.name { font-size: clamp(1.8rem, 8vw, 2.8rem); }
+  .hero-sub { font-size: .75rem; max-width: 100%; }
+  .hero-cta { gap: .65rem; }
+  .hero-bottom { gap: 1rem; margin-top: 2rem; padding-top: 1rem; }
+  .prompt-block { max-width: 100%; padding: .8rem 1rem; }
+  .prompt-line { font-size: .65rem; gap: .5rem; }
+
+  /* ── SECTION HEADERS ── */
+  .section-header, .section-label { margin-bottom: 1.8rem; }
+  .section-title { font-size: 1.25rem; }
+  .sl-title { font-size: 1.25rem; }
+
+  /* ── GRIDS → single column ── */
   .currently-grid,
   .interests-row,
   .lav-body,
   .contact-grid,
   .skills-grid,
-  .projects-layout  { grid-template-columns:1fr; }
-  .p-full           { grid-column:auto; }
-  .about-content-row{ flex-direction:column; }
-  .photo-frame      { width:100%; height:180px; }
-  .hero-bottom      { gap:1rem; }
-  .lav-body         { padding:1.5rem; }
-  .wrap,.hero-wrap  { padding:0 1.2rem; }
+  .projects-layout,
+  .edu-courses,
+  .edu-grades,
+  .exp-focus { grid-template-columns: 1fr; }
+
+  .p-full { grid-column: auto; }
+
+  /* ── ABOUT ── */
+  .about-content-row { flex-direction: column; }
+  .photo-frame { width: 100%; height: 300px; }
+  .c-item { padding: .8rem 1rem; }
+  .int-item { padding: 1rem; }
+
+  /* ── PROJECTS ── */
+  .pc-featured .pc-header { padding: 1.4rem 1.4rem 1.2rem; }
+  .pc-featured .pc-title { font-size: 1rem; }
+  .pc-header { padding: 1rem 1.2rem; }
+  .pc-tags { padding: .6rem 1.2rem .9rem; }
+  .music-block { flex-direction: column; align-items: flex-start; }
+
+  /* ── SKILLS ── */
+  .skill-category { padding: 1.2rem; }
+
+  /* ── LAVITUR ── */
+  .lav-body { padding: 1.5rem; gap: 2rem; }
+  .lav-name { font-size: clamp(2rem, 10vw, 3rem); }
+
+  /* ── EXPERIENCE ── */
+  .edu-item { padding: 1.5rem 1.2rem; }
+  .edu-courses, .edu-grades { gap: .5rem; }
+  .exp-statement { padding: 1.5rem; font-size: .78rem; }
+  .focus-item { padding: 1.2rem; }
+
+  /* ── CONTACT ── */
+  .contact-title { font-size: 1.8rem; }
+  .cb-body { padding: 1.5rem; }
+  .cb-header { flex-wrap: wrap; gap: .3rem; }
+  .contact-ctas { flex-direction: column; gap: .5rem; }
+
+  /* ── FOOTER ── */
+  .footer-inner { flex-direction: column; gap: .4rem; text-align: center; }
 }
