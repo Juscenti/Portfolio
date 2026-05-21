@@ -64,85 +64,113 @@ const PROJECTS: Project[] = [
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   const [images, setImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [lightbox, setLightbox] = useState<number | null>(null);
+
+  const closeLightbox = () => setLightbox(null);
+  const prev = () => setLightbox((i) => (i !== null ? (i - 1 + images.length) % images.length : null));
+  const next = () => setLightbox((i) => (i !== null ? (i + 1) % images.length : null));
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    document.addEventListener("keydown", handleKey);
-
     fetch(`/api/screenshots/${encodeURIComponent(project.title)}`)
       .then((r) => r.json())
       .then((data) => { setImages(data.images ?? []); setLoading(false); })
       .catch(() => setLoading(false));
+    return () => { document.body.style.overflow = ""; };
+  }, [project.title]);
 
-    return () => {
-      document.body.style.overflow = "";
-      document.removeEventListener("keydown", handleKey);
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (lightbox !== null) {
+        if (e.key === "Escape")     { e.stopImmediatePropagation(); closeLightbox(); }
+        if (e.key === "ArrowLeft")  prev();
+        if (e.key === "ArrowRight") next();
+      } else {
+        if (e.key === "Escape") onClose();
+      }
     };
-  }, [onClose, project.title]);
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [lightbox, images.length, onClose]);
 
   return (
-    <div className="pm-overlay" onClick={onClose}>
-      <div className="pm-panel" onClick={(e) => e.stopPropagation()}>
+    <>
+      {/* ── Lightbox ── */}
+      {lightbox !== null && (
+        <div className="lb-overlay" onClick={closeLightbox}>
+          <button className="lb-arrow lb-prev" onClick={(e) => { e.stopPropagation(); prev(); }}>‹</button>
+          <div className="lb-img-wrap" onClick={(e) => e.stopPropagation()}>
+            <img src={images[lightbox]} alt={`${project.title} ${lightbox + 1} of ${images.length}`} className="lb-img" />
+          </div>
+          <button className="lb-arrow lb-next" onClick={(e) => { e.stopPropagation(); next(); }}>›</button>
+          <div className="lb-counter">{lightbox + 1} / {images.length}</div>
+          <button className="lb-close" onClick={closeLightbox}>[×]</button>
+        </div>
+      )}
 
-        <div className="pm-header">
-          <div className="pm-hd-left">
-            <span className="pc-num">{project.num}</span>
-            <span className="pm-title">{project.title}</span>
-            {project.titleNote && (
-              <span className="pm-title-note">{project.titleNote}</span>
+      {/* ── Project modal ── */}
+      <div className="pm-overlay" onClick={onClose}>
+        <div className="pm-panel" onClick={(e) => e.stopPropagation()}>
+
+          <div className="pm-header">
+            <div className="pm-hd-left">
+              <span className="pc-num">{project.num}</span>
+              <span className="pm-title">{project.title}</span>
+              {project.titleNote && (
+                <span className="pm-title-note">{project.titleNote}</span>
+              )}
+            </div>
+            <div className="pm-hd-right">
+              <span className={`pc-status ${project.status === "live" ? "s-live" : "s-wip"}`}>
+                {project.status === "live" ? "● live" : "◌ in progress"}
+              </span>
+              <button className="pm-close" onClick={onClose}>[×] close</button>
+            </div>
+          </div>
+
+          <div className="pm-desc">{project.desc}</div>
+
+          <div className="pm-section">
+            <div className="pm-section-label">~$ ls images/Projects/{project.title}/</div>
+            {loading ? (
+              <div className="pm-no-shots">
+                <span className="dim">// loading...</span>
+              </div>
+            ) : images.length === 0 ? (
+              <div className="pm-no-shots">
+                <span className="dim">
+                  // no images yet — drop files into public/images/Projects/{project.title}/
+                </span>
+              </div>
+            ) : (
+              <div className="pm-shots-grid">
+                {images.map((src, i) => (
+                  <div key={src} className="pm-shot" onClick={() => setLightbox(i)}>
+                    <img src={src} alt={`${project.title} screenshot ${i + 1}`} />
+                  </div>
+                ))}
+              </div>
             )}
           </div>
-          <div className="pm-hd-right">
-            <span className={`pc-status ${project.status === "live" ? "s-live" : "s-wip"}`}>
-              {project.status === "live" ? "● live" : "◌ in progress"}
-            </span>
-            <button className="pm-close" onClick={onClose}>[×] close</button>
-          </div>
-        </div>
 
-        <div className="pm-desc">{project.desc}</div>
-
-        <div className="pm-section">
-          <div className="pm-section-label">~$ ls images/Projects/{project.title}/</div>
-          {loading ? (
-            <div className="pm-no-shots">
-              <span className="dim">// loading...</span>
-            </div>
-          ) : images.length === 0 ? (
-            <div className="pm-no-shots">
-              <span className="dim">
-                // no images yet — drop files into public/images/Projects/{project.title}/
-              </span>
-            </div>
-          ) : (
-            <div className="pm-shots-grid">
-              {images.map((src, i) => (
-                <div key={src} className="pm-shot">
-                  <img src={src} alt={`${project.title} screenshot ${i + 1}`} />
-                </div>
+          <div className="pm-footer">
+            <div className="pc-tags pm-tags">
+              {project.tags.map((t) => (
+                <span key={t} className="tag">{t}</span>
               ))}
             </div>
-          )}
-        </div>
-
-        <div className="pm-footer">
-          <div className="pc-tags pm-tags">
-            {project.tags.map((t) => (
-              <span key={t} className="tag">{t}</span>
-            ))}
+            <div className="pm-links">
+              {project.links.map((l) => (
+                <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="pc-link">
+                  {l.label}
+                </a>
+              ))}
+            </div>
           </div>
-          <div className="pm-links">
-            {project.links.map((l) => (
-              <a key={l.label} href={l.href} target="_blank" rel="noreferrer" className="pc-link">
-                {l.label}
-              </a>
-            ))}
-          </div>
-        </div>
 
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
