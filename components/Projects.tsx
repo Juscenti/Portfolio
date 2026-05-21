@@ -11,7 +11,6 @@ type Project = {
   status: "live" | "wip";
   tags: string[];
   links: ProjectLink[];
-  screenshots: string[];
   layout: "full" | "half";
   quiet?: boolean;
   featured?: boolean;
@@ -25,7 +24,6 @@ const PROJECTS: Project[] = [
     status: "live",
     tags: ["AI", "Maps", "Real-Time", "Civic Tech"],
     links: [{ label: "github", href: "https://github.com/kyim50/scoutz" }],
-    screenshots: [],
     layout: "full",
     featured: true,
   },
@@ -39,7 +37,6 @@ const PROJECTS: Project[] = [
       { label: "live site", href: "https://word-hunter-jade.vercel.app/" },
       { label: "github", href: "https://github.com/Juscenti/WordHunter" },
     ],
-    screenshots: [],
     layout: "half",
   },
   {
@@ -49,7 +46,6 @@ const PROJECTS: Project[] = [
     status: "wip",
     tags: ["TypeScript", "React Native", "Expo", "PostgreSQL", "Full-Stack", "Mobile"],
     links: [{ label: "github", href: "https://github.com/Juscenti/LiveLine" }],
-    screenshots: [],
     layout: "half",
   },
   {
@@ -60,22 +56,30 @@ const PROJECTS: Project[] = [
     status: "wip",
     tags: ["Web", "Brand", "E-Commerce", "Design"],
     links: [{ label: "github", href: "https://github.com/Juscenti/lavitur" }],
-    screenshots: [],
     layout: "full",
     quiet: true,
   },
 ];
 
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
+  const [images, setImages] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     document.addEventListener("keydown", handleKey);
+
+    fetch(`/api/screenshots/${encodeURIComponent(project.title)}`)
+      .then((r) => r.json())
+      .then((data) => { setImages(data.images ?? []); setLoading(false); })
+      .catch(() => setLoading(false));
+
     return () => {
       document.body.style.overflow = "";
       document.removeEventListener("keydown", handleKey);
     };
-  }, [onClose]);
+  }, [onClose, project.title]);
 
   return (
     <div className="pm-overlay" onClick={onClose}>
@@ -100,17 +104,21 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
         <div className="pm-desc">{project.desc}</div>
 
         <div className="pm-section">
-          <div className="pm-section-label">~$ ls screenshots/</div>
-          {project.screenshots.length === 0 ? (
+          <div className="pm-section-label">~$ ls images/Projects/{project.title}/</div>
+          {loading ? (
+            <div className="pm-no-shots">
+              <span className="dim">// loading...</span>
+            </div>
+          ) : images.length === 0 ? (
             <div className="pm-no-shots">
               <span className="dim">
-                // no screenshots yet — drop images into public/screenshots/{project.num.toLowerCase()}/
+                // no images yet — drop files into public/images/Projects/{project.title}/
               </span>
             </div>
           ) : (
             <div className="pm-shots-grid">
-              {project.screenshots.map((src, i) => (
-                <div key={i} className="pm-shot">
+              {images.map((src, i) => (
+                <div key={src} className="pm-shot">
                   <img src={src} alt={`${project.title} screenshot ${i + 1}`} />
                 </div>
               ))}
