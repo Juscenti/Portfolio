@@ -538,6 +538,70 @@ h1.name em {
 }
 .pc-view-btn:hover { color:var(--accent); background:var(--bg3); }
 
+/* Classified button — Lavitur only */
+.pc-classified-btn {
+  position:relative; width:100%;
+  display:flex; align-items:center; gap:.6rem;
+  background:repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,.02) 0 6px,
+    transparent 6px 12px
+  );
+  border:none; border-top:1px solid var(--border);
+  padding:.65rem 1.5rem;
+  font-family:var(--font); font-size:.62rem;
+  color:var(--muted); text-align:left; cursor:pointer;
+  overflow:hidden;
+  transition:background .2s, color .2s;
+}
+.cf-bar {
+  flex:1 1 auto; height:8px;
+  background:repeating-linear-gradient(
+    90deg,
+    currentColor 0 8px,
+    transparent 8px 12px
+  );
+  opacity:.35;
+  transition:opacity .2s;
+}
+.cf-text {
+  position:relative;
+  letter-spacing:.18em;
+  white-space:nowrap;
+  padding:0 .15rem;
+}
+.cf-text::before,
+.cf-text::after {
+  content:attr(data-text);
+  position:absolute; left:0; top:0;
+  width:100%; height:100%;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .12s;
+}
+.cf-text::before { color:#ff3b3b; transform:translate(-1.5px,0); }
+.cf-text::after  { color:#3bd1ff; transform:translate( 1.5px,0); }
+
+.pc-classified-btn:hover {
+  color:#ff5a3c;
+  background:
+    linear-gradient(to right, rgba(255,90,60,.08), transparent 40%, rgba(255,90,60,.08)),
+    repeating-linear-gradient(45deg, rgba(255,90,60,.06) 0 6px, transparent 6px 12px);
+}
+.pc-classified-btn:hover .cf-bar { opacity:.85; }
+.pc-classified-btn:hover .cf-text { animation:cf-glitch .55s steps(2,end) infinite; }
+.pc-classified-btn:hover .cf-text::before,
+.pc-classified-btn:hover .cf-text::after { opacity:.9; }
+
+@keyframes cf-glitch {
+  0%   { transform:translate(0,0); }
+  20%  { transform:translate(-1px,0); }
+  40%  { transform:translate(1px,-1px); }
+  60%  { transform:translate(-1px,1px); }
+  80%  { transform:translate(1px,0); }
+  100% { transform:translate(0,0); }
+}
+
 /* ── PROJECT MODAL ──────────────────────────────── */
 .pm-overlay {
   position:fixed; inset:0; z-index:1000;

@@ -268,9 +268,17 @@ export default function Projects() {
                       <span key={t} className="tag">{t}</span>
                     ))}
                   </div>
-                  <button className="pc-view-btn" onClick={() => setSelected(p)}>
-                    view details →
-                  </button>
+                  {p.title === "Lavitur" ? (
+                    <button className="pc-classified-btn" onClick={() => setSelected(p)}>
+                      <span className="cf-bar" aria-hidden="true"></span>
+                      <span className="cf-text" data-text="[ CLASSIFIED ]">[ CLASSIFIED ]</span>
+                      <span className="cf-bar cf-bar-r" aria-hidden="true"></span>
+                    </button>
+                  ) : (
+                    <button className="pc-view-btn" onClick={() => setSelected(p)}>
+                      view details →
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
