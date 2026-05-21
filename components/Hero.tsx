@@ -9,7 +9,7 @@ const makeNoise = (len: number) => Array.from({ length: len }, rnd).join("");
 const scrambleTarget = (target: string, revealed: number) =>
   target.split("").map((ch, i) => (ch === " " ? " " : i < revealed ? ch : rnd())).join("");
 
-export default function Hero() {
+export default function Hero({ onNavigate }: { onNavigate?: (tab: string) => void }) {
   const [display, setDisplay] = useState("");
   const [revealedCount, setRevealedCount] = useState(0);
   const [animDone, setAnimDone] = useState(false);
@@ -155,7 +155,7 @@ export default function Hero() {
         </p>
 
         <div className="hero-cta r rd3">
-          <a href="#projects" className="btn btn-accent">view work</a>
+          <button onClick={() => onNavigate?.("projects")} className="btn btn-accent">view work</button>
           <a href="/Kuane_Forrest_CV.txt" download="Kuane_Forrest_CV.txt" className="btn">download cv</a>
           <a href="https://github.com/Juscenti" target="_blank" rel="noreferrer" className="btn">github</a>
           <a href="https://www.linkedin.com/in/kuane-forrest-2996012b3/" target="_blank" rel="noreferrer" className="btn">linkedin</a>

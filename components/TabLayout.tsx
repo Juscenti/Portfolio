@@ -86,7 +86,7 @@ export default function TabLayout() {
       <div className="tab-content">
         {activeTab === "home" && (
           <div className="tab-pane home-pane">
-            <Hero />
+            <Hero onNavigate={setActiveTab} />
             <SkillsSummary />
             <Lavitur />
           </div>
