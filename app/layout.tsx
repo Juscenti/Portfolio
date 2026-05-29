@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import CursorAura from "@/components/CursorAura";
+import { Analytics } from "@vercel/analytics/next";
 
 const description =
   "Software engineer out of Kingston, Jamaica. Building scalable systems, mobile apps, and things that last.";
@@ -49,6 +50,7 @@ export default function RootLayout({
         <div id="cur-r"></div>
         <CursorAura />
         {children}
+        <Analytics />
       </body>
     </html>
   );
