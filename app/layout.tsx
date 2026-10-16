@@ -1,22 +1,24 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import CursorAura from "@/components/CursorAura";
+import MapGrid from "@/components/MapGrid";
 
+const title = "Kuane Forrest · Software engineer";
 const description =
-  "Software engineer out of Kingston, Jamaica. Building scalable systems, mobile apps, and things that last.";
+  "Software engineer from Kingston, Jamaica. I build mobile apps, and co-founded Cite, a live campus map on the App Store.";
 
 export const metadata: Metadata = {
-  title: "Kuane Forrest — Software Engineer",
+  title,
   description,
   openGraph: {
-    title: "Kuane Forrest — Software Engineer",
+    title,
     description,
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary",
-    title: "Kuane Forrest — Software Engineer",
+    title,
     description,
   },
 };
@@ -48,6 +50,7 @@ export default function RootLayout({
         <div id="cur"></div>
         <div id="cur-r"></div>
         <CursorAura />
+        <MapGrid />
         {children}
       </body>
     </html>

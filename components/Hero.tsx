@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-const CHARS = "KUANEFORSTJuscenti0123456789!@#$%^*~><{}[]|";
+const APP_STORE = "https://apps.apple.com/us/app/cite-community-mapping/id6807413740";
+
+const CHARS ="KUANEFORSTJuscenti0123456789!@#$%^*~><{}[]|";
 
 const rnd = () => CHARS[Math.floor(Math.random() * CHARS.length)];
 const makeNoise = (len: number) => Array.from({ length: len }, rnd).join("");
@@ -115,27 +117,7 @@ export default function Hero({ onNavigate }: { onNavigate?: (tab: string) => voi
     <section id="hero">
       <div className="hero-wrap">
 
-        <div className="prompt-block r">
-          <div className="prompt-line">
-            <span className="pl-ps">kuane@portfolio:~$</span>
-            <span className="pl-cmd">describe --no-fluff</span>
-          </div>
-          <div className="prompt-line">
-            <span className="pl-out">&gt; name: kuane forrest</span>
-          </div>
-          <div className="prompt-line">
-            <span className="pl-out">&gt; location: kingston, jamaica</span>
-          </div>
-          <div className="prompt-line">
-            <span className="pl-out">&gt; note: builds things that last</span>
-          </div>
-          <div className="prompt-line">
-            <span className="pl-ps">kuane@portfolio:~$</span>
-            <span className="pl-cmd blink">_</span>
-          </div>
-        </div>
-
-        <h1 className="name r rd1">
+        <h1 className="name r">
           <span style={{ display: "inline-block", whiteSpace: "pre" }}>
             {display.split("").map((char, i) => (
               <span
@@ -148,35 +130,39 @@ export default function Hero({ onNavigate }: { onNavigate?: (tab: string) => voi
           </span>
         </h1>
 
-        <p className="hero-sub r rd2">
-          Software engineer out of Kingston, Jamaica.<br />
-          I care less about moving fast and more about<br />
-          building something you don&apos;t have to rebuild.
+        <p className="hero-sub r rd1">
+          Software engineer from Kingston, Jamaica. I mostly build mobile apps
+          in React Native, along with the databases and APIs behind them.
+          Outside of code I draw, write, and I&apos;m starting a clothing brand.
         </p>
 
-        <div className="hero-cta r rd3">
+        <div className="hero-cta r rd2">
           <button onClick={() => onNavigate?.("projects")} className="btn btn-accent">view work</button>
           <a href="/Kuane_Forrest_CV.txt" download="Kuane_Forrest_CV.txt" className="btn">download cv</a>
           <a href="https://github.com/Juscenti" target="_blank" rel="noreferrer" className="btn">github</a>
           <a href="https://www.linkedin.com/in/kuane-forrest-2996012b3/" target="_blank" rel="noreferrer" className="btn">linkedin</a>
         </div>
 
-        <div className="hero-bottom r rd4">
-          <div className="hero-stat">
-            <div className="hs-n">4</div>
-            <div className="hs-l">projects</div>
+        <dl className="hero-now r rd3">
+          <div className="hn-row">
+            <dt>now</dt>
+            <dd>
+              Co-founder of{" "}
+              <a href={APP_STORE} target="_blank" rel="noreferrer" className="hn-cite">
+                <img src="/images/cite-icon.png" alt="" />Cite
+              </a>
+              , a live campus map, on the App Store since September 2026
+            </dd>
           </div>
-          <div className="hero-stat-div"></div>
-          <div className="hero-stat">
-            <div className="hs-n">7</div>
-            <div className="hs-l">languages</div>
+          <div className="hn-row">
+            <dt>studying</dt>
+            <dd>Computing at the University of Technology, Jamaica</dd>
           </div>
-          <div className="hero-stat-div"></div>
-          <div className="hero-stat">
-            <div className="hs-n">1</div>
-            <div className="hs-l">brand</div>
+          <div className="hn-row">
+            <dt>also</dt>
+            <dd>LiveLine, and the first Lavitur collection</dd>
           </div>
-        </div>
+        </dl>
 
       </div>
     </section>

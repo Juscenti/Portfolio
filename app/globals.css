@@ -38,7 +38,8 @@
 }
 
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-html { scroll-behavior:smooth; }
+html { scroll-behavior:smooth; font-size:18px; }
+@media(max-width: 900px) { html { font-size:17px; } }
 
 body {
   background:
@@ -56,6 +57,9 @@ body {
 
 /* ── SCANLINE — removed (was darkening background) ── */
 
+/* ── BACKGROUND DOT GRID (components/MapGrid.tsx) ── */
+.map-grid { position:fixed; inset:0; width:100%; height:100%; z-index:-1; pointer-events:none; }
+
 /* ── CURSOR ── */
 #cur  { position:fixed; width:4px; height:4px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:width .15s,height .15s; }
 #cur-r{ position:fixed; width:24px; height:24px; border:1px solid var(--accent); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); opacity:.35; transition:width .2s,height .2s,opacity .2s; }
@@ -71,9 +75,9 @@ body.ch #cur-r{ width:38px; height:38px; opacity:.6; }
 /* ─────────────────────────────────────────────
    LAYOUT
 ───────────────────────────────────────────── */
-.wrap { max-width:860px; margin:0 auto; padding:0 2rem; }
+.wrap { max-width:1040px; margin:0 auto; padding:0 2rem; }
 
-section { padding:6rem 0 3rem; scroll-margin-top:64px; }
+section { padding:3.5rem 0 2rem; scroll-margin-top:64px; }
 
 /* ─────────────────────────────────────────────
    NAV
@@ -87,7 +91,7 @@ nav.scrolled { border-color:var(--border); background:rgba(14,14,14,.94); backdr
 [data-theme="light"] nav.scrolled { background:rgba(250,250,248,.94); }
 
 .nav-inner {
-  max-width:860px; margin:0 auto; padding:.85rem 2rem;
+  max-width:1040px; margin:0 auto; padding:.85rem 2rem;
   display:flex; justify-content:space-between; align-items:center;
 }
 .nav-logo {
@@ -116,7 +120,7 @@ nav.scrolled { border-color:var(--border); background:rgba(14,14,14,.94); backdr
 ───────────────────────────────────────────── */
 
 /* Style A: terminal command (Projects, Contact) */
-.section-header  { margin-bottom:2.5rem; }
+.section-header  { margin-bottom:1.75rem; }
 .sh-line         { display:flex; align-items:center; gap:1rem; margin-bottom:.5rem; }
 .sh-cmd          { color:var(--muted); font-size:.7rem; }
 .sh-cmd span     { color:var(--text); }          /* NOT accent — just white/grey */
@@ -125,7 +129,7 @@ nav.scrolled { border-color:var(--border); background:rgba(14,14,14,.94); backdr
 .section-title .dim { color:var(--muted2); font-weight:400; }
 
 /* Style B: clean numeric label (About, Skills) */
-.section-label   { margin-bottom:2.5rem; }
+.section-label   { margin-bottom:1.75rem; }
 .sl-num          { font-size:.6rem; color:var(--muted2); letter-spacing:.2em; display:block; margin-bottom:.6rem; }
 .sl-title        { font-size:1.5rem; font-weight:700; color:var(--white); letter-spacing:-.02em; line-height:1; }
 .sl-rule         { width:2rem; height:1px; background:var(--border2); margin-top:.8rem; }
@@ -134,11 +138,10 @@ nav.scrolled { border-color:var(--border); background:rgba(14,14,14,.94); backdr
    HERO
 ───────────────────────────────────────────── */
 #hero {
-  min-height:100vh;
   display:flex; flex-direction:column; justify-content:center;
-  padding:0;
+  padding:5rem 0 3.5rem;
 }
-.hero-wrap { max-width:860px; margin:0 auto; padding:0 2rem; width:100%; }
+.hero-wrap { max-width:1040px; margin:0 auto; padding:0 2rem; width:100%; }
 
 /* Terminal prompt — secondary element, quiet */
 .prompt-block {
@@ -162,6 +165,30 @@ nav.scrolled { border-color:var(--border); background:rgba(14,14,14,.94); backdr
 .blink         { animation:blink 1s step-end infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
+/* "now / studying / also" rows under the buttons */
+.hero-now {
+  margin-top:2.5rem; padding-top:1.25rem;
+  border-top:1px solid var(--border);
+  display:flex; flex-direction:column; gap:.55rem;
+  max-width:640px;
+}
+.hn-row      { display:flex; gap:1rem; font-size:.72rem; line-height:1.6; }
+.hn-row dt   { color:var(--muted2); min-width:5.5rem; flex-shrink:0; }
+.hn-row dt::before { content:'['; }
+.hn-row dt::after  { content:']'; }
+.hn-row dd   { color:var(--muted); }
+.hn-cite {
+  color:var(--white); text-decoration:none; font-weight:600;
+  border-bottom:1px solid var(--border2);
+  transition:border-color .2s;
+}
+.hn-cite:hover { border-color:var(--accent); }
+.hn-cite img {
+  display:inline-block;
+  width:1.05em; height:1.05em; border-radius:.25em;
+  vertical-align:-.17em; margin-right:.35em;
+}
+
 /* THE name — dominant element, nothing competes */
 h1.name {
   font-size: clamp(2rem, 5vw, 3.5rem);
@@ -183,7 +210,7 @@ h1.name em {
 .hero-sub {
   color:var(--muted);
   font-size:.8rem; line-height:1.9;
-  max-width:440px; margin-bottom:2rem;
+  max-width:640px; margin-bottom:2rem;
   border-left:2px solid var(--border2);
   padding-left:1rem;
 }
@@ -217,7 +244,7 @@ h1.name em {
   border-top:1px solid var(--border);
 }
 .hero-stat     { text-align:center; }
-.hs-n          { font-size:1.3rem; font-weight:700; color:var(--white); }   /* NOT accent */
+.hs-n          { font-size:1.3rem; font-weight:700; color:var(--white); white-space:nowrap; }   /* NOT accent */
 .hs-l          { font-size:.6rem; color:var(--muted); margin-top:.1rem; }
 .hero-stat-div { width:1px; height:30px; background:var(--border); }
 
@@ -276,7 +303,7 @@ h1.name em {
 /* ─────────────────────────────────────────────
    ABOUT
 ───────────────────────────────────────────── */
-#about { background:var(--bg); }
+#about { background:transparent; }
 
 .about-content-row {
   display:flex; gap:2.5rem; align-items:flex-start; margin-bottom:1.5rem;
@@ -441,7 +468,7 @@ h1.name em {
 /* ─────────────────────────────────────────────
    SKILLS
 ───────────────────────────────────────────── */
-#skills { background:var(--bg2); }
+#skills { background:color-mix(in srgb, var(--bg2) 70%, transparent); }
 
 .skills-grid {
   display:grid; grid-template-columns:1fr 1fr;
@@ -478,7 +505,7 @@ h1.name em {
 /* ─────────────────────────────────────────────
    PROJECTS
 ───────────────────────────────────────────── */
-#projects { background:var(--bg); }
+#projects { background:transparent; }
 
 .projects-layout {
   display:grid; grid-template-columns:1fr 1fr;
@@ -516,6 +543,11 @@ h1.name em {
 .pc-num    { color:var(--muted2); font-size:.62rem; }
 .pc-title  { color:var(--text); font-size:.95rem; font-weight:600; letter-spacing:-.01em; margin-bottom:.35rem; transition:color .2s; }
 .pc-desc   { color:var(--muted); font-size:.72rem; line-height:1.75; }
+.pc-role   { color:var(--muted); font-size:.62rem; margin-bottom:.6rem; }
+.pc-notes  { list-style:none; margin-top:1rem; display:flex; flex-direction:column; gap:.45rem; }
+.pc-notes li { color:var(--text); font-size:.7rem; line-height:1.65; padding-left:1rem; position:relative; }
+.pc-notes li::before { content:'-'; position:absolute; left:0; color:var(--muted2); }
+.pc-featured .pc-desc { font-size:.78rem; color:var(--text); max-width:620px; }
 .pc-meta   { display:flex; align-items:center; gap:.75rem; }
 .pc-status { font-size:.58rem; padding:.2rem .55rem; border:1px solid; white-space:nowrap; }
 .s-live    { border-color:rgba(0,255,136,.3); color:var(--green); }
@@ -746,7 +778,7 @@ h1.name em {
 /* ─────────────────────────────────────────────
    LAVITUR
 ───────────────────────────────────────────── */
-#lavitur { padding:5rem 0; background:var(--bg3); position:relative; }
+#lavitur { padding:3rem 0; background:color-mix(in srgb, var(--bg3) 75%, transparent); position:relative; }
 
 .lav-scaffold {
   position:absolute; top:0; left:0; right:0;
@@ -759,12 +791,6 @@ h1.name em {
 .lavitur-block { 
   border:2px solid var(--border); overflow:hidden; position:relative; 
   background:var(--bg);
-  box-shadow:0 0 20px rgba(200,255,0,0.08);
-  transition:box-shadow .3s;
-}
-
-.lavitur-block.lav-construction:hover {
-  box-shadow:0 0 30px rgba(200,255,0,0.15);
 }
 
 /* Construction corners */
@@ -804,12 +830,10 @@ h1.name em {
   font-size:clamp(3rem,7vw,5.5rem);
   font-weight:800; letter-spacing:-.05em;
   color:var(--white); line-height:.85; margin-bottom:1rem;
-  text-shadow:0 0 20px rgba(200,255,0,0.2);
 }
 
 .lav-name em { 
   color:var(--accent); font-style:normal;
-  text-shadow:0 0 10px rgba(200,255,0,0.5);
 }
 
 .lav-tag { 
@@ -826,8 +850,7 @@ h1.name em {
 .lav-right { display:flex; flex-direction:column; gap:1rem; }
 .lav-stat-row { 
   display:flex; gap:1px; background:var(--border);
-  border:1px solid var(--accent);
-  box-shadow:0 0 15px rgba(200,255,0,0.1);
+  border:1px solid var(--border);
 }
 
 .lav-stat { 
@@ -838,13 +861,11 @@ h1.name em {
 .lav-stat:last-child { border-right:none; }
 .lav-stat:hover { 
   background:var(--bg3);
-  box-shadow:inset 0 0 10px rgba(200,255,0,0.1);
 }
 
 .lav-stat-n { 
   font-size:1.2rem; font-weight:700; 
   color:var(--accent);
-  text-shadow:0 0 5px rgba(200,255,0,0.3);
 }
 .lav-stat-l { font-size:.58rem; color:var(--muted); margin-top:.25rem; }
 
@@ -902,7 +923,7 @@ h1.name em {
 }
 
 .status-label {
-  font-size:.58rem; color:var(--accent); font-weight:600;
+  font-size:.58rem; color:var(--accent); font-weight:600; white-space:nowrap;
 }
 
 .lav-site-box p {
@@ -914,7 +935,7 @@ h1.name em {
 /* ─────────────────────────────────────────────
    EXPERIENCE
 ───────────────────────────────────────────── */
-#experience { background:var(--bg); }
+#experience { background:transparent; }
 
 .exp-statement {
   border:1px solid var(--border);
@@ -923,6 +944,11 @@ h1.name em {
   font-size:.85rem;
   color:var(--muted);
   line-height:1.9;
+}
+
+.exp-role-desc {
+  font-size:.78rem; color:var(--text); line-height:1.85;
+  margin-bottom:.8rem; max-width:620px;
 }
 
 .exp-statement p {
@@ -1035,7 +1061,7 @@ h1.name em {
 /* ─────────────────────────────────────────────
    CONTACT
 ───────────────────────────────────────────── */
-#contact { background:var(--bg); }
+#contact { background:transparent; }
 
 .contact-block   { border:1px solid var(--border); overflow:hidden; }
 .cb-header {
@@ -1060,9 +1086,9 @@ h1.name em {
 /* ─────────────────────────────────────────────
    FOOTER
 ───────────────────────────────────────────── */
-footer { border-top:1px solid var(--border); padding:1.5rem 0; background:var(--bg); }
+footer { border-top:1px solid var(--border); padding:1.5rem 0; background:transparent; }
 .footer-inner {
-  max-width:860px; margin:0 auto; padding:0 2rem;
+  max-width:1040px; margin:0 auto; padding:0 2rem;
   display:flex; justify-content:space-between; align-items:center;
   font-size:.62rem; color:var(--muted);
 }
@@ -1085,7 +1111,7 @@ footer { border-top:1px solid var(--border); padding:1.5rem 0; background:var(--
 [data-theme="light"] .tab-nav.scrolled { background:rgba(250,250,248,.94); }
 
 .tab-nav-inner {
-  max-width:860px; margin:0 auto; padding:.85rem 2rem;
+  max-width:1040px; margin:0 auto; padding:.85rem 2rem;
   display:flex; justify-content:space-between; align-items:center; width:100%;
 }
 
@@ -1128,12 +1154,10 @@ footer { border-top:1px solid var(--border); padding:1.5rem 0; background:var(--
   display:flex; flex-direction:column;
 }
 
-.home-pane #hero {
-  min-height:calc(100vh - 64px);
-}
+.home-pane #hero { }
 
 #skills-summary {
-  padding:3rem 0;
+  padding:1.5rem 0 3rem;
 }
 
 .skills-summary {
@@ -1204,7 +1228,7 @@ footer { border-top:1px solid var(--border); padding:1.5rem 0; background:var(--
   .wrap, .hero-wrap { padding: 0 1.2rem; }
 
   /* Section vertical rhythm */
-  section { padding: 3rem 0 2rem; scroll-margin-top: 80px; }
+  section { padding: 2.25rem 0 1.5rem; scroll-margin-top: 80px; }
 
   /* Old nav links */
   .nav-r a { display: none; }
@@ -1233,7 +1257,7 @@ footer { border-top:1px solid var(--border); padding:1.5rem 0; background:var(--
   /* Offset for taller 2-row nav */
   .tab-content { padding-top: 86px; }
   .tab-pane { min-height: calc(100vh - 86px); }
-  .home-pane #hero { min-height: calc(100vh - 86px); }
+  #hero { padding: 2.5rem 0 2rem; }
 
   /* ── HERO ── */
   h1.name { font-size: clamp(1.8rem, 8vw, 2.8rem); }
@@ -1241,6 +1265,8 @@ footer { border-top:1px solid var(--border); padding:1.5rem 0; background:var(--
   .hero-cta { gap: .65rem; }
   .hero-bottom { gap: 1rem; margin-top: 2rem; padding-top: 1rem; }
   .prompt-block { max-width: 100%; padding: .8rem 1rem; }
+  .hero-now { margin-top: 2rem; }
+  .hn-row { flex-direction: column; gap: 0; }
   .prompt-line { font-size: .65rem; gap: .5rem; }
 
   /* ── SECTION HEADERS ── */

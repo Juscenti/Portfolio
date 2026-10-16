@@ -3,10 +3,9 @@ export default function Footer() {
     <footer>
       <div className="footer-inner">
         <div>
-          <span style={{ color: "var(--accent)" }}>[kf]</span>&nbsp;kuane forrest — software
-          engineer
+          <span style={{ color: "var(--accent)" }}>[kf]</span>&nbsp;kuane forrest, software engineer
         </div>
-        <span>© 2026 // built with intent</span>
+        <span>© 2026 · kingston, jamaica</span>
       </div>
     </footer>
   );

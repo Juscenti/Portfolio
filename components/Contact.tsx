@@ -25,28 +25,27 @@ export default function Contact() {
         <div className="section-header r">
           <div className="sh-line">
             <span className="sh-cmd">
-              <span>~$</span> ping kuane --say-hello
+              <span>~/</span>contact
             </span>
             <div className="sh-rule"></div>
           </div>
-          <div className="section-title">
-            Contact <span className="dim">// 05</span>
-          </div>
+          <div className="section-title">Contact</div>
         </div>
 
         <div className="contact-block r rd1">
           <div className="cb-header">
-            <span>~/contact $ ls -la</span>
-            <span style={{ color: "var(--accent)" }}>● online — response &lt;24h</span>
+            <span>kuaneforrest@gmail.com</span>
+            <span style={{ color: "var(--accent)" }}>● open to work</span>
           </div>
           <div className="cb-body">
             <div className="contact-title">
-              Let&apos;s
+              Say
               <br />
-              <span>Build.</span>
+              <span>hello.</span>
             </div>
             <p className="contact-sub">
-              Open to opportunities, collaborations, and conversations worth having.
+              I&apos;m open to software roles and collaborations, and always happy to
+              talk about Cite. Email is the fastest way to reach me.
             </p>
             <div className="contact-grid">
               <div className="contact-item">
@@ -70,24 +69,29 @@ export default function Contact() {
                 </div>
               </div>
               <div className="contact-item">
-                <div className="ci-key">[location]</div>
-                <div className="ci-val" style={{ color: "var(--muted)" }}>
-                  Kingston, Jamaica [JA]
+                <div className="ci-key">[cite]</div>
+                <div className="ci-val">
+                  <a href="https://joincite.com" target="_blank" rel="noreferrer">
+                    joincite.com
+                  </a>
                 </div>
               </div>
               <div className="contact-item">
-                <div className="ci-key">[status]</div>
-                <div className="ci-val" style={{ color: "var(--accent)" }}>
-                  available for work
+                <div className="ci-key">[location]</div>
+                <div className="ci-val" style={{ color: "var(--muted)" }}>
+                  Kingston, Jamaica
                 </div>
               </div>
             </div>
             <div className="contact-ctas">
+              <a href="mailto:kuaneforrest@gmail.com" className="btn btn-accent">
+                email me
+              </a>
               <a
                 href="https://www.linkedin.com/in/kuane-forrest-2996012b3/"
                 target="_blank"
                 rel="noreferrer"
-                className="btn btn-accent"
+                className="btn"
               >
                 linkedin
               </a>
@@ -99,14 +103,7 @@ export default function Contact() {
               >
                 github
               </a>
-              <a
-                href="#"
-                className="btn"
-                onClick={(e) => {
-                  e.preventDefault();
-                  alert("Add your CV PDF URL to enable download.");
-                }}
-              >
+              <a href="/Kuane_Forrest_CV.txt" download="Kuane_Forrest_CV.txt" className="btn">
                 download cv
               </a>
             </div>

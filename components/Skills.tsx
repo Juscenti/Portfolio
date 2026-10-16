@@ -26,6 +26,7 @@ const categories = [
     label: "Data & Databases",
     skills: [
       { name: "PostgreSQL", primary: true },
+      { name: "Supabase", primary: true },
       { name: "SQL Design", primary: false },
       { name: "Database Architecture", primary: false },
     ],
@@ -63,7 +64,7 @@ export default function Skills() {
 
         {/* Style B header */}
         <div className="section-label r">
-          <span className="sl-num">02 — THE STACK</span>
+          <span className="sl-num">THE STACK</span>
           <div className="sl-title">What I build with.</div>
           <div className="sl-rule"></div>
         </div>

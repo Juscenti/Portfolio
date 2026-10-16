@@ -8,7 +8,9 @@ type Project = {
   title: string;
   titleNote?: string;
   desc: string;
-  status: "live" | "wip";
+  role?: string;
+  notes?: string[];
+  status: "shipped" | "live" | "wip";
   tags: string[];
   links: ProjectLink[];
   layout: "full" | "half";
@@ -19,18 +21,28 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     num: "001",
-    title: "Traverse",
-    desc: "Community-powered, AI-assisted civic intelligence map. Users submit real-time field reports; AI groups and surfaces patterns over noise. Built for campuses, cities, and eventually everywhere.",
-    status: "live",
-    tags: ["AI", "Maps", "Real-Time", "Civic Tech"],
-    links: [{ label: "github", href: "https://github.com/kyim50/scoutz" }],
+    title: "Cite",
+    role: "Co-founder · 2026 to now",
+    desc: "A live map of UTech, UWI Mona and Kingston, written by the people who are there. Students drop pins for study spots and bathrooms, post how long the line is, flag a flooded road. Reports expire on their own, so what you see is what's true now. Free on the App Store.",
+    notes: [
+      "1.0 went out on the App Store on Sep 10, 2026. We were on 1.8 by Sep 30.",
+      "Campus search reads UTech room codes: 47A1 is building 47, floor A, room 1.",
+      "Walking directions use our own router over a hand-built campus grid. Routing on OpenStreetMap paths came out about 1.9× longer.",
+      "Missing-person alerts need two confirmations before they show beyond the area they were posted in.",
+    ],
+    status: "shipped",
+    tags: ["React Native", "Expo", "Supabase", "PostgreSQL", "Maps", "iOS"],
+    links: [
+      { label: "app store", href: "https://apps.apple.com/us/app/cite-community-mapping/id6807413740" },
+      { label: "joincite.com", href: "https://joincite.com" },
+    ],
     layout: "full",
     featured: true,
   },
   {
     num: "002",
     title: "WordHunter",
-    desc: "Advanced Word Hunt puzzle solver built for precision and speed. Finds all valid words across multiple board types with real-time visualization. Configurable rules, intelligent pathfinding, and instant results ranked by score.",
+    desc: "Solver for Word Hunt boards. Paste in a 4×4, 5×5, circle or X board and it finds every valid word, draws the path, and sorts them by score.",
     status: "live",
     tags: ["JavaScript", "Algorithm", "Pathfinding", "Vercel"],
     links: [
@@ -42,7 +54,7 @@ const PROJECTS: Project[] = [
   {
     num: "003",
     title: "LiveLine",
-    desc: "Full-stack mobile application. TypeScript frontend built with React Native and Expo, backed by a PostgreSQL database. Clean separation of concerns across app, backend, and database layers.",
+    desc: "Mobile app for event logistics and coordinating people on the day. React Native and Expo on the front, PostgreSQL behind it, with the app, API and database kept in separate layers.",
     status: "wip",
     tags: ["TypeScript", "React Native", "Expo", "PostgreSQL", "Full-Stack", "Mobile"],
     links: [{ label: "github", href: "https://github.com/Juscenti/LiveLine" }],
@@ -52,7 +64,7 @@ const PROJECTS: Project[] = [
     num: "004",
     title: "Lavitur",
     titleNote: "// the brand site",
-    desc: "Official web presence for Lavitur. Designed and built from scratch to match the brand: streetwear precision with luxury finish.",
+    desc: "The site for Lavitur, my clothing brand. Designed and built from scratch alongside the first collection.",
     status: "wip",
     tags: ["Web", "Brand", "E-Commerce", "Design"],
     links: [{ label: "github", href: "https://github.com/Juscenti/lavitur" }],
@@ -60,6 +72,12 @@ const PROJECTS: Project[] = [
     quiet: true,
   },
 ];
+
+const STATUS: Record<Project["status"], { cls: string; label: string }> = {
+  shipped: { cls: "s-live", label: "● on the app store" },
+  live:    { cls: "s-live", label: "● live" },
+  wip:     { cls: "s-wip",  label: "◌ in progress" },
+};
 
 function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
   const [images, setImages] = useState<string[]>([]);
@@ -121,8 +139,8 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
               )}
             </div>
             <div className="pm-hd-right">
-              <span className={`pc-status ${project.status === "live" ? "s-live" : "s-wip"}`}>
-                {project.status === "live" ? "● live" : "◌ in progress"}
+              <span className={`pc-status ${STATUS[project.status].cls}`}>
+                {STATUS[project.status].label}
               </span>
               <button className="pm-close" onClick={onClose}>[×] close</button>
             </div>
@@ -130,17 +148,24 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 
           <div className="pm-desc">{project.desc}</div>
 
+          {project.notes && (
+            <div className="pm-section">
+              <div className="pm-section-label">{project.role ?? "notes"}</div>
+              <ul className="pc-notes">
+                {project.notes.map((n) => <li key={n}>{n}</li>)}
+              </ul>
+            </div>
+          )}
+
           <div className="pm-section">
-            <div className="pm-section-label">~$ ls images/Projects/{project.title}/</div>
+            <div className="pm-section-label">screenshots</div>
             {loading ? (
               <div className="pm-no-shots">
-                <span className="dim">// loading...</span>
+                <span className="dim">loading...</span>
               </div>
             ) : images.length === 0 ? (
               <div className="pm-no-shots">
-                <span className="dim">
-                  // no images yet — drop files into public/images/Projects/{project.title}/
-                </span>
+                <span className="dim">screenshots coming soon</span>
               </div>
             ) : (
               <div className="pm-shots-grid">
@@ -176,10 +201,6 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [mtrack, setMtrack] = useState("—");
-  const [martist, setMartist] = useState("");
-  const [mstatus, setMstatus] = useState("connecting...");
-  const [playing, setPlaying] = useState(false);
   const [selected, setSelected] = useState<Project | null>(null);
 
   useEffect(() => {
@@ -193,12 +214,6 @@ export default function Projects() {
     sectionRef.current
       ?.querySelectorAll<HTMLElement>(".r")
       .forEach((el) => ro.observe(el));
-
-    setMstatus("last listening");
-    setMtrack("Set up Last.fm to enable");
-    setMartist("Add API key & username in the code");
-    setPlaying(false);
-
     return () => ro.disconnect();
   }, []);
 
@@ -213,11 +228,11 @@ export default function Projects() {
 
           <div className="section-header r">
             <div className="sh-line">
-              <span className="sh-cmd"><span>~$</span> ls -la projects/</span>
+              <span className="sh-cmd"><span>~/</span>projects</span>
               <div className="sh-rule"></div>
             </div>
             <div className="section-title">
-              Selected Work <span className="dim">// 03</span>
+              Work <span className="dim">// shipped and in progress</span>
             </div>
           </div>
 
@@ -232,8 +247,8 @@ export default function Projects() {
                     <div className="pc-top-row">
                       <span className="pc-num">{p.num}</span>
                       <div className="pc-meta">
-                        <span className={`pc-status ${p.status === "live" ? "s-live" : "s-wip"}`}>
-                          {p.status === "live" ? "● live" : "◌ in progress"}
+                        <span className={`pc-status ${STATUS[p.status].cls}`}>
+                          {STATUS[p.status].label}
                         </span>
                         <div className="pc-links">
                           {p.links.map((l) => (
@@ -260,7 +275,13 @@ export default function Projects() {
                           </span>
                         )}
                       </div>
+                      {p.role && <div className="pc-role">{p.role}</div>}
                       <div className="pc-desc">{p.desc}</div>
+                      {p.featured && p.notes && (
+                        <ul className="pc-notes">
+                          {p.notes.map((n) => <li key={n}>{n}</li>)}
+                        </ul>
+                      )}
                     </div>
                   </div>
                   <div className="pc-tags">
@@ -276,30 +297,12 @@ export default function Projects() {
                     </button>
                   ) : (
                     <button className="pc-view-btn" onClick={() => setSelected(p)}>
-                      view details →
+                      {p.featured ? "screenshots →" : "details →"}
                     </button>
                   )}
                 </div>
               </div>
             ))}
-          </div>
-
-          <div className="music-block r" style={{ marginTop: "2rem" }}>
-            <div className="music-l">
-              <div className="music-status">
-                <span className="live-dot"></span>
-                <span>{mstatus}</span>
-              </div>
-              <div className="music-name">{mtrack}</div>
-              <div className="music-art">{martist}</div>
-            </div>
-            <div className={`music-bars${playing ? "" : " bars-off"}`}>
-              <div className="bar"></div>
-              <div className="bar"></div>
-              <div className="bar"></div>
-              <div className="bar"></div>
-              <div className="bar"></div>
-            </div>
           </div>
 
         </div>

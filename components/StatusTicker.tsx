@@ -1,9 +1,9 @@
 export default function StatusTicker() {
   const items = [
     { dot: "dot-green", text: "available for opportunities" },
-    { dot: "dot-blue", text: "building: traverse — civic AI map" },
+    { dot: "dot-blue", text: "shipped: cite, on the app store" },
     { dot: "dot-yellow", text: "learning: system design & architecture" },
-    { dot: "dot-green", text: "lavitur — in development" },
+    { dot: "dot-green", text: "lavitur: in development" },
     { dot: "dot-blue", text: "based in: kingston, jamaica" },
   ];
 

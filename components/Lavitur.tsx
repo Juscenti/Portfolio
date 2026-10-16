@@ -42,40 +42,35 @@ export default function Lavitur() {
 
           <div className="lav-body">
             <div>
-              <div className="lav-tag">clothing brand // 04</div>
+              <div className="lav-tag">my clothing brand</div>
               <div className="lav-name">
                 Lavi<em>tur</em>
               </div>
               <p className="lav-desc">
-                Most brands pick a side. Lavitur doesn&apos;t.<br /><br />
-                Streetwear built to the precision of luxury — or luxury stripped down to the
-                density of streetwear. It&apos;s the same thesis applied to fabric the way it
-                gets applied to code: no compromises, no shortcuts, no half-finished execution.<br /><br />
-                The first collection is being made. It will be ready when it&apos;s right.
+                Lavitur is the brand I&apos;m starting on the side: streetwear cuts, made with
+                the kind of fabric and finishing you&apos;d expect from a luxury label.<br /><br />
+                I&apos;m working on the first collection now, and building the site for it
+                myself.
               </p>
             </div>
             <div className="lav-right">
               <div className="lav-stat-row">
                 <div className="lav-stat">
-                  <div className="lav-stat-n">01</div>
-                  <div className="lav-stat-l">founder</div>
+                  <div className="lav-stat-n">1st</div>
+                  <div className="lav-stat-l">collection in progress</div>
                 </div>
                 <div className="lav-stat">
-                  <div className="lav-stat-n">∞</div>
-                  <div className="lav-stat-l">vision</div>
-                </div>
-                <div className="lav-stat">
-                  <div className="lav-stat-n">—</div>
-                  <div className="lav-stat-l">launch TBD</div>
+                  <div className="lav-stat-n">TBA</div>
+                  <div className="lav-stat-l">launch date</div>
                 </div>
               </div>
               <div className="lav-site-box">
                 <div className="lav-site-header">lavitur.com</div>
                 <div className="lav-site-status">
                   <span className="status-bar"></span>
-                  <span className="status-label">Under Construction</span>
+                  <span className="status-label">Under construction</span>
                 </div>
-                <p>The site will exist when it deserves to. Not before.</p>
+                <p>The site goes up with the first drop.</p>
               </div>
             </div>
           </div>

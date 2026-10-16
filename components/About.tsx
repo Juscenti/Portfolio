@@ -34,7 +34,7 @@ export default function About() {
 
         {/* Style B header — clean numeric, no terminal command */}
         <div className="section-label r">
-          <span className="sl-num">01 — ABOUT</span>
+          <span className="sl-num">ABOUT</span>
           <div className="sl-title">Who I am.</div>
           <div className="sl-rule"></div>
         </div>
@@ -42,10 +42,13 @@ export default function About() {
         {/* Bio + photo carousel side by side */}
         <div className="about-content-row r rd1">
           <div className="about-bio">
-            A precision-focused software engineer who values clean, structured systems.
-            I always aim for scalable, high-performance and fun builds.
-            Everything I create is built to a high standard using my full current capabilities.
-            Based in Kingston, Jamaica. Building things that last.
+            I&apos;m a software engineer from Kingston, studying Computing at UTech.
+            Most of my time this year has gone into Cite, the campus map I co-founded.
+            It started because the stuff you actually need to know on campus,
+            like whether the bathroom on your floor is locked or how long the
+            canteen line is, never makes it onto Google Maps. We shipped 1.0 to
+            the App Store in September 2026 and have kept updating it since.
+            Outside of that I draw, write, and I&apos;m slowly learning Japanese.
           </div>
 
           {/* Image carousel — tap left/right to navigate */}
@@ -55,28 +58,28 @@ export default function About() {
         {/* Currently grid */}
         <div className="currently-grid r rd2">
           <div className="c-item">
-            <span className="c-key"><span>[</span>building<span>]</span></span>
-            <span className="c-val"><b>Traverse</b> — civic AI intelligence map</span>
+            <span className="c-key"><span>[</span>shipped<span>]</span></span>
+            <span className="c-val"><b>Cite</b>, live campus map, on the App Store</span>
           </div>
           <div className="c-item">
             <span className="c-key"><span>[</span>learning<span>]</span></span>
-            <span className="c-val">system design &amp; distributed architecture</span>
+            <span className="c-val">system design and distributed systems</span>
           </div>
           <div className="c-item">
             <span className="c-key"><span>[</span>studying<span>]</span></span>
-            <span className="c-val">日本語 — learning Japanese</span>
+            <span className="c-val">日本語, slowly</span>
           </div>
           <div className="c-item">
-            <span className="c-key"><span>[</span>creating<span>]</span></span>
-            <span className="c-val"><b>Lavitur</b> — streetwear meets luxury</span>
+            <span className="c-key"><span>[</span>starting<span>]</span></span>
+            <span className="c-val"><b>Lavitur</b>, my clothing brand</span>
           </div>
           <div className="c-item">
             <span className="c-key"><span>[</span>writing<span>]</span></span>
-            <span className="c-val">prose, ideas, structured thought</span>
+            <span className="c-val">short pieces, mostly for myself</span>
           </div>
           <div className="c-item">
-            <span className="c-key"><span>[</span>making<span>]</span></span>
-            <span className="c-val">art — visual expression alongside code</span>
+            <span className="c-key"><span>[</span>drawing<span>]</span></span>
+            <span className="c-val">sketchbooks, characters, whatever&apos;s around</span>
           </div>
         </div>
 
@@ -86,21 +89,21 @@ export default function About() {
             <div className="int-icon">// art</div>
             <div className="int-name">Visual Art</div>
             <div className="int-desc">
-              Visual thinking bleeds into how I build. Structure and aesthetics are the same discipline.
+              I took Visual Arts for CXC and never stopped. It&apos;s why I end up caring about how the apps I work on look, not just whether they run.
             </div>
           </div>
           <div className="int-item">
             <div className="int-icon">// write</div>
             <div className="int-name">Writing</div>
             <div className="int-desc">
-              Clarity in prose mirrors clarity in code. Both demand precision and knowing when to stop.
+              Mostly notes and short pieces. Writing out an idea is usually how I find out I don&apos;t understand it yet.
             </div>
           </div>
           <div className="int-item">
             <div className="int-icon">// 日本語</div>
             <div className="int-name">Japanese</div>
             <div className="int-desc">
-              A different system of thought. Learning it rewires how you approach pattern and structure.
+              Learning it on the side. Slow going, but I like it.
             </div>
           </div>
         </div>

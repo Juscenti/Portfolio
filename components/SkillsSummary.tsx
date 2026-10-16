@@ -32,7 +32,7 @@ export default function SkillsSummary() {
     <section id="skills-summary" ref={sectionRef}>
       <div className="wrap">
         <div className="section-label r">
-          <span className="sl-num">SKILLS — OVERVIEW</span>
+          <span className="sl-num">SKILLS</span>
           <div className="sl-title">What I build with.</div>
           <div className="sl-rule"></div>
         </div>
@@ -49,7 +49,7 @@ export default function SkillsSummary() {
         </div>
 
         <p className="skills-note r">
-          See the <strong>skills</strong> tab for the complete list and detailed breakdown.
+          The full list is under the skills tab.
         </p>
       </div>
     </section>

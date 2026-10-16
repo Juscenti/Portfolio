@@ -24,24 +24,39 @@ export default function Experience() {
       <div className="wrap">
         {/* Background Statement */}
         <div className="section-label r">
-          <span className="sl-num">BACKGROUND</span>
-          <div className="sl-title">Who I am & where I'm headed.</div>
+          <span className="sl-num">EXPERIENCE</span>
+          <div className="sl-title">What I&apos;ve worked on.</div>
           <div className="sl-rule"></div>
         </div>
 
-        <div className="exp-statement r rd1">
-          <p>
-            Detail-oriented software engineer with hands-on experience in full-stack development
-            and technical problem-solving. Demonstrates strong analytical thinking and commitment
-            to building scalable, high-performance solutions. Precision-focused on clean code,
-            structured systems, and building things that last.
-          </p>
+        <div className="exp-education r rd1">
+          <div className="edu-item">
+            <div className="edu-header">
+              <div className="edu-school">Cite</div>
+              <div className="edu-degree">Co-founder · 2026 to now · Kingston</div>
+            </div>
+            <div className="edu-coursework">
+              <span className="edu-label">What it is</span>
+              <p className="exp-role-desc">
+                A live map of UTech, UWI Mona and Kingston, updated by the people who are there.
+                Pins, reports that expire on their own, area alerts and events, on iOS.
+                We took it from first commit in March to 1.0 on the App Store in September, and
+                to 1.8 three weeks later.
+              </p>
+              <div className="edu-courses">
+                <span>React Native and Expo</span>
+                <span>Supabase and PostgreSQL</span>
+                <span>App Store releases</span>
+                <span>joincite.com</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Education */}
         <div className="section-label r" style={{ marginTop: "3rem" }}>
           <span className="sl-num">EDUCATION</span>
-          <div className="sl-title">Foundations & learning.</div>
+          <div className="sl-title">School.</div>
           <div className="sl-rule"></div>
         </div>
 
@@ -71,11 +86,11 @@ export default function Experience() {
             <div className="edu-passes">
               <span className="edu-label">Passes</span>
               <div className="edu-grades">
-                <span>English Language — Grade 2</span>
-                <span>Mathematics — Grade 1</span>
-                <span>Visual Arts — Grade 2</span>
-                <span>Information Technology — Grade 2</span>
-                <span>English Literature — Grade 3</span>
+                <span>English Language: Grade 2</span>
+                <span>Mathematics: Grade 1</span>
+                <span>Visual Arts: Grade 2</span>
+                <span>Information Technology: Grade 2</span>
+                <span>English Literature: Grade 3</span>
               </div>
             </div>
           </div>
@@ -84,26 +99,26 @@ export default function Experience() {
         {/* Current Focus */}
         <div className="section-label r" style={{ marginTop: "3rem" }}>
           <span className="sl-num">CURRENT FOCUS</span>
-          <div className="sl-title">What I'm working on.</div>
+          <div className="sl-title">What I&apos;m on right now.</div>
           <div className="sl-rule"></div>
         </div>
 
         <div className="exp-focus r rd1">
           <div className="focus-item">
+            <span className="focus-status">Shipping</span>
+            <span className="focus-desc">Cite updates on the App Store</span>
+          </div>
+          <div className="focus-item">
             <span className="focus-status">Building</span>
-            <span className="focus-desc">Traverse — AI-powered civic intelligence platform</span>
+            <span className="focus-desc">LiveLine, a mobile app for event logistics</span>
           </div>
           <div className="focus-item">
-            <span className="focus-status">Developing</span>
-            <span className="focus-desc">LiveLine — Full-stack mobile application</span>
-          </div>
-          <div className="focus-item">
-            <span className="focus-status">Creating</span>
-            <span className="focus-desc">Lavitur — Precision streetwear brand</span>
+            <span className="focus-status">Starting</span>
+            <span className="focus-desc">Lavitur, my clothing brand</span>
           </div>
           <div className="focus-item">
             <span className="focus-status">Learning</span>
-            <span className="focus-desc">Distributed systems, advanced architecture, Japanese language</span>
+            <span className="focus-desc">Distributed systems, and Japanese</span>
           </div>
         </div>
       </div>
